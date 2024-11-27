@@ -1,17 +1,34 @@
-export default async function Home() {
-  const res = await fetch('http://localhost:3000/api/products');
-  const products = await res.json();
+'use client';
+
+import { useState, useEffect } from 'react';
+import Link from 'next/link';
+import Home from '@/pages/Home';
+
+export default function Page() {
+  const [search, setSearch] = useState('');
+  const [products, setProducts] = useState([]);
+
+  // Fetch products on the client
+  useEffect(() => {
+    async function fetchProducts() {
+      const res = await fetch('/api/products');
+      if (!res.ok) {
+        console.error('Failed to fetch products');
+        return;
+      }
+      const data = await res.json();
+      setProducts(data);
+    }
+    fetchProducts();
+  }, []);
+
+  const filteredProducts = products.filter((product) =>
+    product.title.toLowerCase().includes(search.toLowerCase())
+  );
 
   return (
-    <main>
-      <h1>Products</h1>
-      <ul>
-        {products.map((product: any) => (
-          <li key={product.id}>
-            <a href={`/product/${product.id}`}>{product.name}</a> - ${product.price}
-          </li>
-        ))}
-      </ul>
-    </main>
+    <>
+      <Home products={products} />
+    </>
   );
 }
