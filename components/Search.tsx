@@ -34,7 +34,7 @@ function Search() {
             {product && <div className='absolute bg-white left-[50%] p-5 -translate-x-[50%] w-[500px]'>
                 {
                     loading ? 'loading...' : product?.length === 0 ? 'ничего не найдено' : product.map(product =>
-                        <Link href={'product/' + product.id} className='font-bold text-base mt-3 block'>{product.title}</Link>
+                        <Link key={product.id} href={'product/' + product.id} className='font-bold text-base mt-3 block'>{product.title}</Link>
                     )
                 }
             </div>}
