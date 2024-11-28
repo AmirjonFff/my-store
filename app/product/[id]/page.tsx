@@ -12,15 +12,13 @@ type Props = {
 
 export async function generateMetadata({
     params: { id },
-  }: Props): Promise<Metadata> {
+}: Props): Promise<Metadata> {
     const { product } = await getProductById(id);
-  
+
     return {
-      title: product.title,
+        title: product.title,
     };
-  }
-
-
+}
 
 export default async function Page({ params: { id } }: Props) {
     const { product }: { product: IProduct } = await getProductById(id)
