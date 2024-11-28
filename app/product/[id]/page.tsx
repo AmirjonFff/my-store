@@ -1,19 +1,8 @@
-function Page({ data }: { data: any }) {
+function Page() {
     return (
         <>
-            <h1>{data.name}</h1>
-            <p>{data.description}</p>
+            <h1></h1>
+            <p></p>
         </>
     )
 }
-
-export async function getServerSideProps() {
-    const res = await fetch('http://localhost:3000/api/products');
-    const data = await res.json();
-
-    return {
-        props: { data }
-    }
-}
-
-export default Page
