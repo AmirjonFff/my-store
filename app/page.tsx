@@ -1,6 +1,7 @@
 'use client';
 
 import Card from '@/components/Card';
+import CardSkelet from '@/components/CardSkelet';
 import { getPostsBySearch } from '@/services/getProduct';
 import { IProduct } from '@/services/type';
 import { useEffect, useState } from 'react';
@@ -8,12 +9,15 @@ import { useEffect, useState } from 'react';
 export default function Page() {
   const [posts, setPosts] = useState<IProduct[]>()
   const [query, setQuery] = useState<string>('')
+  const [loading, setLoadin] = useState(false)
 
   useEffect(() => {
     async function fetchPosts() {
+      setLoadin(true)
       let res = await getPostsBySearch(query)
       let data = await res
       setPosts(data)
+      setLoadin(false)
     }
     fetchPosts()
   }, [query])
@@ -30,7 +34,8 @@ export default function Page() {
         <input value={query} onChange={e => setQuery(e.target.value)} type="email" placeholder="Search Something..." className="w-full outline-none bg-transparent text-gray-600 text-sm" />
       </div>
       <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-7 mx-auto'>
-        {posts?.map((product) => <Card key={product.id} {...product} />)}
+        {loading ? [...Array(10)].map((_, i) => <CardSkelet key={i} />) :
+          posts?.map((product) => <Card key={product.id} {...product} />)}
       </div>
     </div>
   );
