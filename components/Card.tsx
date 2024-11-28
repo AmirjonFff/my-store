@@ -4,7 +4,7 @@ import Link from 'next/link';
 
 export default function Card({ id, title, description, price, image }: IProduct) {
     return (
-        <Link href={'product/' + id} className="mx-auto mt-11 w-full transform cursor-pointer overflow-hidden rounded-lg bg-white shadow-md duration-300 hover:scale-105 hover:shadow-lg">
+        <Link href={'product/' + id} className="mx-auto w-full transform cursor-pointer overflow-hidden rounded-lg bg-white shadow-md duration-300 hover:scale-105 hover:shadow-lg">
             {image ? <img className="h-56 w-full object-contain object-center" src={image} alt="Product Image" /> : <div className="grid h-36 w-36 place-items-center rounded-lg bg-gray-300">
                 <svg
                     xmlns="http://www.w3.org/2000/svg"

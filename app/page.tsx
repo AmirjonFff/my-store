@@ -1,5 +1,4 @@
 'use client';
-
 import Card from '@/components/Card';
 import CardSkelet from '@/components/CardSkelet';
 import { getPostsBySearch } from '@/services/getProduct';
@@ -33,8 +32,8 @@ export default function Page() {
         </svg>
         <input value={query} onChange={e => setQuery(e.target.value)} type="email" placeholder="Search Something..." className="w-full outline-none bg-transparent text-gray-600 text-sm" />
       </div>
-      <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-7 mx-auto'>
-        {loading ? [...Array(10)].map((_, i) => <CardSkelet key={i} />) :
+      <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mx-auto mt-10'>
+        {loading ? [...Array(10)].map((_, i) => <CardSkelet key={i} />) : posts?.length === 0 ? 'Нет продукт' :
           posts?.map((product) => <Card key={product.id} {...product} />)}
       </div>
     </div>

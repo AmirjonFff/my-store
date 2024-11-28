@@ -8,12 +8,8 @@ export const getPostsBySearch = async (search: string) => {
     return response.json();
 };
 
-export const getPostsById = async (id: number) => {
+export const getProductById = async (id: number) => {
     const response = await fetch(`http://localhost:3000/api/products/${id}`); // Укажите полный URL
-
-    if (!response.ok) {
-        throw new Error('Failed to fetch product.');
-    }
 
     return response.json();
 }
