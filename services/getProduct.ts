@@ -3,7 +3,7 @@
 
 export const getProductBySearch = async (search: string) => {
     if (search) {
-        const response = await fetch(`/api/products?q=${search}`, {
+        const response = await fetch(`http://af-mystore-nextjs.vercel.app/api/products?q=${search}`, {
             cache: 'force-cache',
         });
 
@@ -14,7 +14,7 @@ export const getProductBySearch = async (search: string) => {
 };
 
 export const getProduct = async () => {
-    const response = await fetch(`/api/products`);
+    const response = await fetch(`http://af-mystore-nextjs.vercel.app/api/products`);
 
     if (!response.ok) throw new Error('Unable to fetch products.');
 
@@ -22,7 +22,7 @@ export const getProduct = async () => {
 };
 
 export const getProductById = async (id: number) => {
-    const response = await fetch(`/api/products/${id}`); // Укажите полный URL
+    const response = await fetch(`http://af-mystore-nextjs.vercel.app/api/products/${id}`); // Укажите полный URL
 
     return response.json();
 }
