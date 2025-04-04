@@ -1,10 +1,17 @@
 import Card from '@/components/Card';
 import CardSkelet from '@/components/CardSkelet';
 import Search from '@/components/Search';
-import { getProduct } from '@/services/getProduct';
 import { IProduct } from '@/services/type';
 
 export default async function Page() {
+
+  const getProduct = async () => {
+    const response = await fetch(`http://localhost:3000/api/products`);
+
+    if (!response.ok) throw new Error('Unable to fetch products.');
+
+    return response.json();
+  };
 
   const product: IProduct[] = await getProduct()
 

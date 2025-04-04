@@ -1,5 +1,4 @@
 // const baseUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3004";
-'use client'
 
 export const getProductBySearch = async (search: string) => {
     if (search) {
