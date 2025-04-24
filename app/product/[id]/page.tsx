@@ -5,23 +5,19 @@ import { Metadata } from "next";
 import Link from "next/link";
 
 type Props = {
-    params: {
-        id: number;
-    };
+    product: IProduct | null; // Измените тип на IProduct или null
 };
 
-export async function generateMetadata({
-    params: { id },
-}: Props): Promise<Metadata> {
-    const { product } = await getProductById(id);
+export async function generateMetadata({ params }: { params: { id: number } }): Promise<Metadata> {
+    const { product } = await getProductById(params.id);
 
     return {
         title: product.title,
     };
 }
 
-export default async function Page({ params: { id } }: Props) {
-    const { product }: { product: IProduct } = await getProductById(id)
+export default function Page({ product }: Props) {
+    // const { product }: { product: IProduct } = await getProductById(id)
 
     return (
         <>
