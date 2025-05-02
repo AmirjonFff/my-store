@@ -1,3 +1,6 @@
+"use client"
+
+
 import { getProductBySearch } from '@/services/getProduct';
 import { IProduct } from '@/services/type';
 import Link from 'next/link';

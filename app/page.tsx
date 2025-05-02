@@ -3,7 +3,9 @@ import Search from '@/components/Search';
 import { getProduct } from '@/services/getProduct';
 import { IProduct } from '@/services/type';
 
-export default function Page({ products }: { products: IProduct[] }) {
+export default async function Page() {
+    const products: IProduct[] = await getProduct();
+
     return (
         <div className='container mx-auto py-5 pt-24'>
             <Search initialProducts={products} /> 
@@ -13,14 +15,4 @@ export default function Page({ products }: { products: IProduct[] }) {
             </div>
         </div>
     );
-}
-
-export async function getServerSideProps() {
-    const products: IProduct[] = await getProduct();
-
-    return {
-        props: {
-            products,
-        },
-    };
 }
