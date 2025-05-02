@@ -4,6 +4,8 @@ import { NextResponse } from "next/server";
 export async function GET(req: Request, context: any) {
     const { params } = context;
 
+    console.log(params, 10)
+
     const product = products.find(product => params.id === product.id.toString());
 
     if (!product) {

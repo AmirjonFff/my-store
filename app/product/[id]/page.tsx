@@ -5,10 +5,12 @@ import { Metadata } from "next";
 import Link from "next/link";
 
 type Props = {
-    product: IProduct | null; // Измените тип на IProduct или null
+    params: {
+        id: number;
+    };
 };
 
-export async function generateMetadata({ params }: { params: { id: number } }): Promise<Metadata> {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const { product } = await getProductById(params.id);
 
     return {
@@ -16,8 +18,22 @@ export async function generateMetadata({ params }: { params: { id: number } }): 
     };
 }
 
-export default function Page({ product }: Props) {
-    // const { product }: { product: IProduct } = await getProductById(id)
+export default async function Page({ params }: Props) {
+    console.log(params);
+
+    const { id } = params;
+    let product: IProduct | null = null;
+
+    console.log(id);
+
+    try {
+        const  newproduct  = await getProductById(id);
+        console.log(newproduct);
+        
+        product = newproduct.product
+    } catch (error) {
+        console.error('Error fetching product:', error);
+    }
 
     return (
         <>
@@ -29,11 +45,11 @@ export default function Page({ product }: Props) {
                                 <div className="flex flex-col md:flex-row -mx-4">
                                     <div className="md:flex-1 px-4">
                                         <div className="h-[460px] rounded-lg bg-gray-300 dark:bg-white mb-4">
-                                            <img className="w-full h-full object-contain" src={product.image} alt="Product Image" />
+                                            <img className="w-full h-full object-contain" src={product?.image} alt="Product Image" />
                                         </div>
                                     </div>
                                     <div className="md:flex-1 px-4">
-                                        <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-2">{product.title}</h2>
+                                        <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-2">{product?.title}</h2>
                                         <div className="flex mb-4">
                                             <div className="mr-4 text-lg">
                                                 <span className="font-bold text-gray-700 dark:text-gray-300">Price:</span>
